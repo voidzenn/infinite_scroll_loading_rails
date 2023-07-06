@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.limit(24)
+    @pagy, @posts = pagy(Post.all)
 
     render '/posts'
   end

@@ -1,6 +1,6 @@
-<div class="mx-2 my-4 w-full">
+<div class="mx-auto my-4 w-full">
   <p class="text-2xl font-bold text-blue-700">Posts</p>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap overflow-y-scroll  ">
     <% @posts.each do |item| %>
       <div class="w-1/4 px-5"><%= render 'partials/card', data: item %></div>
     <% end %>
@@ -9,6 +9,6 @@
 
 <script>
 $(document).ready(function() {
-  alert("hey")
+  console.log("hey")
 })
 </script>
