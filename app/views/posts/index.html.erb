@@ -1,0 +1,23 @@
+<div id="posts-content" class="flex flex-wrap overflow-y-auto">
+  <%= render 'partials/posts', posts: @posts %>
+</div>
+
+<script>
+$(window).scroll(function() {
+  const scrollTop = $(window).scrollTop()
+  const winHeight = $(window).height()
+  const docHeight = $(document).height()
+  var currentPage = <%= @pagy.page %>
+
+  if(scrollTop + winHeight >= docHeight) {
+    currentPage++
+    $.get({
+      url: '<%= posts_path %>',
+      datatype: 'script',
+      data: { page: currentPage }
+    }).done(function(response) {
+      $("#posts-content").append('<%= j(render 'partials/posts', posts: response) %>')
+    })
+  }
+})
+</script>

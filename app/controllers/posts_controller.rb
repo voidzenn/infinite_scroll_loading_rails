@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
   def index
-    @pagy, @posts = pagy(Post.all)
+    page = params[:page] || 1
+    @pagy, @posts = pagy(Post.all, page: page)
 
-    render '/posts'
+    respond_to do |format|
+      format.html
+      format.js { render layout: false }
+    end
   end
 end
