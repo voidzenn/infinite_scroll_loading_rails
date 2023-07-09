@@ -1,23 +1,22 @@
 <div id="posts-content" class="flex flex-wrap overflow-y-auto">
-  <%= render 'partials/posts', posts: @posts %>
+  <%= render 'posts' %>
 </div>
 
-<script>
+<script type="text/javascript">
+let currentPage = <%= @pagy.page %>;
+
 $(window).scroll(function() {
-  const scrollTop = $(window).scrollTop()
-  const winHeight = $(window).height()
-  const docHeight = $(document).height()
-  var currentPage = <%= @pagy.page %>
+  const scrollTop = $(window).scrollTop();
+  const winHeight = $(window).height();
+  const docHeight = $(document).height();
 
   if(scrollTop + winHeight >= docHeight) {
-    currentPage++
+    currentPage += 1
     $.get({
       url: '<%= posts_path %>',
-      datatype: 'script',
-      data: { page: currentPage }
-    }).done(function(response) {
-      $("#posts-content").append('<%= j(render 'partials/posts', posts: response) %>')
-    })
+      dataType: 'script',
+      data: { page: currentPage },
+    });
   }
-})
+});
 </script>
