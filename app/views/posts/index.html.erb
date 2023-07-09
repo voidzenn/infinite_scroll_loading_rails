@@ -3,20 +3,20 @@
 </div>
 
 <script type="text/javascript">
-let currentPage = <%= @pagy.page %>;
+  let currentPage = <%= @pagy.page %>;
 
-$(window).scroll(function() {
-  const scrollTop = $(window).scrollTop();
-  const winHeight = $(window).height();
-  const docHeight = $(document).height();
+  $(window).scroll(function() {
+    const scrollTop = $(window).scrollTop();
+    const winHeight = $(window).height();
+    const docHeight = $(document).height();
 
-  if(scrollTop + winHeight >= docHeight) {
-    currentPage += 1
-    $.get({
-      url: '<%= posts_path %>',
-      dataType: 'script',
-      data: { page: currentPage },
-    });
-  }
-});
+    if(scrollTop + winHeight >= docHeight) {
+      currentPage += 1
+      $.get({
+        url: '<%= posts_path %>',
+        dataType: 'script',
+        data: { page: currentPage },
+      });
+    }
+  });
 </script>
