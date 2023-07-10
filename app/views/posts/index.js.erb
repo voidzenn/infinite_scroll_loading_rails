@@ -1,1 +1,10 @@
-$("#posts-content").append('<%= j render 'posts', layout: nil %>')
+var postData = <%= @posts.to_json.html_safe %>;
+var pagyPage = <%= @pagy.page %>;
+
+postData?.forEach(function(post, index) {
+  // Shift index start from 0 to 1
+  index++;
+  var content = $(".content"+pagyPage);
+  content.find(".post-title"+index).removeClass().addClass("font-semibold").text(post.title);
+  content.find(".post-content"+index).removeClass().text(post.content);
+});

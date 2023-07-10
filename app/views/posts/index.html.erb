@@ -1,9 +1,18 @@
 <div id="posts-content" class="flex flex-wrap overflow-y-auto">
-  <%= render 'posts' %>
 </div>
 
 <script type="text/javascript">
+  const itemCount = <%= @pagy.items %>
   let currentPage = <%= @pagy.page %>;
+
+  $(document).ready(function() {
+    addLoading()
+
+    $.get({
+      url: '<%= posts_path %>',
+      dataType: 'script',
+    });
+  })
 
   $(window).scroll(function() {
     const scrollTop = $(window).scrollTop();
@@ -11,12 +20,29 @@
     const docHeight = $(document).height();
 
     if(scrollTop + winHeight >= docHeight) {
-      currentPage += 1
+      let newPage = currentPage += 1;
+      addLoading(newPage);
+
       $.get({
         url: '<%= posts_path %>',
         dataType: 'script',
-        data: { page: currentPage },
-      });
+        data: { page: newPage },
+      })
     }
   });
+
+  function addLoading(page = currentPage){
+    let counter = 1
+
+    while(counter <= itemCount){
+      $("#posts-content")
+      .append('<div class="content'+page+' w-1/2">'+
+                '<div class="my-5 mx-4 py-5 px-5 bg-blue-100 rounded-lg text-gray-700">'+
+                  '<div class="post-title'+counter+' animate-pulse py-3 bg-blue-600 w-1/3 rounded-lg"></div>'+
+                  '<div class="post-content'+counter+' mt-1 animate-pulse py-3 bg-blue-600 w-2/3 rounded-lg"></div>'+
+                '</div>'+
+              '</div>');
+      counter++
+    }
+  }
 </script>
