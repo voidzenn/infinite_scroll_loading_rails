@@ -4,13 +4,17 @@
 <script type="text/javascript">
   const itemCount = <%= @pagy.items %>
   let currentPage = <%= @pagy.page %>;
+  let isLoading = false;
 
   $(document).ready(function() {
     addLoading()
 
+    isLoading = true;
     $.get({
       url: '<%= posts_path %>',
       dataType: 'script',
+    }).done(function() {
+      isLoading = false;
     });
   })
 
@@ -19,14 +23,17 @@
     const winHeight = $(window).height();
     const docHeight = $(document).height();
 
-    if(scrollTop + winHeight >= docHeight) {
+    if((scrollTop + winHeight >= docHeight) && !isLoading) {
       let newPage = currentPage += 1;
       addLoading(newPage);
 
+      isLoading = true;
       $.get({
         url: '<%= posts_path %>',
         dataType: 'script',
         data: { page: newPage },
+      }).done(function() {
+        isLoading = false;
       })
     }
   });
