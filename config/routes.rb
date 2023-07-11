@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "/posts", to: "posts#index"
+  get "/posts/last_item_count", to: "posts#last_item_count"
 end

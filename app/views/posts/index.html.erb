@@ -3,8 +3,10 @@
 
 <script type="text/javascript">
   const itemCount = <%= @pagy.items %>
+  const pagyLastPage = <%= @pagy.last %>
   let currentPage = <%= @pagy.page %>;
   let isLoading = false;
+  let lastItemCount = <%= @last_item.count %>
 
   $(document).ready(function() {
     addLoading()
@@ -22,10 +24,13 @@
     const scrollTop = $(window).scrollTop();
     const winHeight = $(window).height();
     const docHeight = $(document).height();
+    const lastPage = currentPage === pagyLastPage
 
-    if((scrollTop + winHeight >= docHeight) && !isLoading) {
+    if((scrollTop + winHeight >= docHeight) && !isLoading && !lastPage) {
       let newPage = currentPage += 1;
-      addLoading(newPage);
+      const newItemCount = (newPage === pagyLastPage) ? lastItemCount : itemCount;
+
+      addLoading(newPage, newItemCount);
 
       isLoading = true;
       $.get({
@@ -38,10 +43,10 @@
     }
   });
 
-  function addLoading(page = currentPage){
-    let counter = 1
+  function addLoading(page = currentPage, count = itemCount){
+    let counter = 1;
 
-    while(counter <= itemCount){
+    while(counter <= count){
       $("#posts-content")
       .append('<div class="content'+page+' w-1/2">'+
                 '<div class="my-5 mx-4 py-5 px-5 bg-blue-100 rounded-lg text-gray-700">'+
