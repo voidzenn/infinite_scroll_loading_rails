@@ -14,4 +14,4 @@
  - Access localhost **http://127.0.0.1:3000/** or the generated url and port after running **rails s**
 
 ### Preview
-![infinite_scroll_loading_recording](https://github.com/voidzenn/infinite_scroll_loading_rails/assets/47482620/7ffd52d1-d2d1-4abd-a217-c124b97b724a)
+![infinite_scroll_loading_recording2](https://github.com/voidzenn/infinite_scroll_loading_rails/assets/47482620/f9a415eb-bbf5-4fc3-8ec0-2ba5fdee1c4b)
