@@ -1,24 +1,4 @@
-# README
+# Infinite Scrolling with Skeleton Screen Loading
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Preview
+![infinite_scroll_loading_recording](https://github.com/voidzenn/infinite_scroll_loading_rails/assets/47482620/7ffd52d1-d2d1-4abd-a217-c124b97b724a)
